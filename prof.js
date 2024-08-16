@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Prof = () => {
+const Prof = ({ route }) => {
+  const { userName } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bem-vindo, Professor!</Text>
+      <Text style={styles.text}>Bem-vindo, {userName}!</Text>
     </View>
   );
 };
