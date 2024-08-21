@@ -42,11 +42,11 @@ function LoginScreen({ navigation }) {
         where('senha', '==', senha)
       );
       const querySnapshot = await getDocs(q);
-  
+
       if (!querySnapshot.empty) {
-        // Usuário encontrado na coleção 'gestao'
-        const userId = querySnapshot.docs[0].id; // Usando o ID do documento como o nome
-        navigation.navigate('Gestao', { userName: userId });
+        const userId = querySnapshot.docs[0].id;
+        const userData = querySnapshot.docs[0].data(); // Pegando os dados do usuário
+        navigation.navigate('Gestao', { userName: userId, nif: userData.nif, senha: userData.senha });
       } else {
         const qProfessores = query(
           collection(db, 'professores'),
@@ -54,11 +54,11 @@ function LoginScreen({ navigation }) {
           where('senha', '==', senha)
         );
         const querySnapshotProfessores = await getDocs(qProfessores);
-  
+
         if (!querySnapshotProfessores.empty) {
-          // Usuário encontrado na coleção 'professores'
-          const userId = querySnapshotProfessores.docs[0].id; // Usando o ID do documento como o nome
-          navigation.navigate('Prof', { userName: userId });
+          const userId = querySnapshotProfessores.docs[0].id;
+          const userData = querySnapshotProfessores.docs[0].data(); // Pegando os dados do usuário
+          navigation.navigate('Prof', { userName: userId, nif: userData.nif, senha: userData.senha });
         } else {
           alert('NIF ou senha inválidos.');
         }
@@ -67,7 +67,7 @@ function LoginScreen({ navigation }) {
       console.error("Erro ao fazer login:", error);
     }
   };
-  
+
 
   if (!fontsLoaded) {
     return null;
