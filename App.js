@@ -8,6 +8,8 @@ import { db } from './firebaseConfig';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import Gestao from './gestao';
 import Prof from './prof';
+import SelectClass from './SelectClass';
+import Attendance from './Attendance';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -160,10 +162,12 @@ function LoginScreen({ navigation }) {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="selectCLass">
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Gestao" component={Gestao} options={{ title: 'Gestão' }} />
         <Stack.Screen name="Prof" component={Prof} options={{ title: 'Professor' }} />
+        <Stack.Screen name="selectCLass" component={SelectClass} options={{ title: 'SelectClass' }} />
+        <Stack.Screen name="Attendance" component={Attendance} options={{ title: 'Attendance' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
